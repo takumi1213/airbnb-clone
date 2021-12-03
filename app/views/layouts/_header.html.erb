@@ -1,25 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Airbnb-clone</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-        
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </ul>
+    <div class="container">
+        <a class="navbar-brand" href="/">Airbnb-clone</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </ul>
 
-        <ul class="navbar-nav ml-auto">
-            <button type="button" class="btn btn-outline-primary">become host</button>
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Sign up</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Log in</a>
-            </li>
-        </ul>
+            <ul class="navbar-nav ml-auto">
+                <button type="button" class="btn btn-outline-primary mr-3">become host</button>
+                <% if user_signed_in? %>
+                    <%= link_to raw("<i class='fa fa-sign-out-alt'></i> Logout"), destroy_user_session_path, class: "nav-link", method: :delete %>
+                    <%= link_to "Edit user" , edit_user_registration_path ,class: "nav-link" %>
+                    <%= link_to "user page" , user_path(current_user) ,class: "nav-link" %>
+                <% else %>
+                    <li class="nav-item active">
+                        <%= link_to "Log in" , new_user_session_path ,class: "nav-link" %>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to "Sign up" , new_user_registration_url ,class: "nav-link"%>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
     </div>
 </nav>
