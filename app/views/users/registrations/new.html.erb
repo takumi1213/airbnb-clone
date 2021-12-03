@@ -1,0 +1,32 @@
+<% provide(:title, "Sign up") %>
+<h2 class="text-center">Sign up</h2>
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+
+            <div class="field mt-3">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name" ,class:"w-100" , placeholder: "Name" %>
+            </div>
+
+            <div class="field mt-3">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class:"w-100" , placeholder: "E-mail" %>
+            </div>
+
+            <div class="field mt-3">
+            <%= f.password_field :password, autocomplete: "new-password" ,class:"w-100" , placeholder: "Password(6characters minimum)" %>
+            </div>
+
+            <div class="field mt-3">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class:"w-100" , placeholder: "Password Confirmation" %>
+            </div>
+
+            <div class="actions">
+            <%= f.submit "Sign up" ,class:"w-100 my-3 btn-primary" %>
+            </div>
+        <% end %>
+
+        Already have an account?<%= render "users/shared/links" %>
+    </div>
+</div>

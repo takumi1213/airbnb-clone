@@ -1,0 +1,90 @@
+<% provide(:title, "Profile") %>
+
+<div class="row">
+    <div class="col-2">
+        <img src="../assets/a.jpg" class="card-img-top" alt="...">
+        <hr>
+        <hr>
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col-6">
+            <h2><%=@user.name %></h2><hr>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-6">
+            <h2> Email : <%= @user.email%></h2>
+            </div>
+            <div class="col-3">
+            <%= link_to raw("<i class='fa fa-pen'></i> Edit user") , edit_user_registration_path ,class: "btn btn-primary" %>
+            </div>
+            <div class="col-3">
+            <%= link_to raw("<i class='fa fa-trash'></i> Delete user"), registration_path(@user),
+                                                            method: :delete,data: { confirm: "Are you sure?" },
+                                                            class:"btn btn-danger" %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <p>Listings()</p>
+    <hr>
+    <div class="col">
+    <div class="row d-flex justify-content-center">
+        <div class="card mx-2" style="width: 18rem;">
+        <img src="../assets/a.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+        </div>
+
+        <div class="card mx-2" style="width: 18rem;">
+        <img src="../assets/a.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+        </div>
+    </div>
+
+    <hr>
+</section>
+
+<section>
+    <p>Reviews from Guests()</p>
+    <div class="row">
+        <div class="col-2">
+            <img src="../assets/a.jpg" class="card-img-top rounded-circle" alt="..." style="width:100px ; background-size:cover;">
+        </div>
+        <div class="col-10">
+            <p>October 01, 2021</p>
+            <p>The host is nice</p>
+        </div>
+    </div>
+    <hr>
+</section>
+
+<section>
+    <p>Reviews from Hosts()</p>
+    <div class="row">
+        <div class="col-2">
+            <img src="../assets/a.jpg" class="card-img-top rounded-circle" alt="..." style="width:100px ; background-size:cover;">
+        </div>
+        <div class="col-10">
+            <p>October 01, 2021</p>
+            <p>The host is nice</p>
+        </div>
+    </div>
+    <hr>
+</section>
