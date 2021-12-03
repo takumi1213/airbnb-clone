@@ -4,6 +4,9 @@
 // that code so it'll be compiled.
 import "bootstrap"
 import "@fortawesome/fontawesome-free/js/all";
+import './src/application.scss'
+import toastr from 'toastr'
+window.toastr = toastr
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
