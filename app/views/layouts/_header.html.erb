@@ -12,12 +12,22 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </ul>
-
+            
             <ul class="navbar-nav ml-auto">
-                <button type="button" class="btn btn-outline-primary mr-3">become host</button>
+            <%= link_to "Become a host", new_listing_path, class: "btn btn-outline-primary mr-3" %>
                 <% if user_signed_in? %>
-                    <%= link_to "user page" , user_path(current_user) ,class: "nav-link" %>
-                    <%= link_to raw("<i class='fa fa-sign-out-alt'></i> Logout"), destroy_user_session_path, class: "nav-link", method: :delete %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false"><%=current_user.name %></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%= link_to "Profile" , user_path(current_user) ,class: "dropdown-item" %>
+                    <div class="dropdown-divider"></div>
+                    <%= link_to "Manage Listings", listings_path, class: "dropdown-item" %>
+                    <%= link_to "Your Reservation" , "" ,class: "dropdown-item" %>
+                    <%= link_to "Go Trip" , "" ,class: "dropdown-item" %>
+                    <div class="dropdown-divider"></div>
+                    <%= link_to raw("<i class='fa fa-sign-out-alt'></i> Logout"), destroy_user_session_path, class: "dropdown-item", method: :delete %>
+                    </div>
+                </li>
                 <% else %>
                     <li class="nav-item active">
                         <%= link_to "Log in" , new_user_session_path ,class: "nav-link" %>

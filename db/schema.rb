@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_123759) do
+ActiveRecord::Schema.define(version: 2021_12_03_135321) do
+
+  create_table "listings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "listing_name"
+    t.text "listing_description"
+    t.string "home_type"
+    t.string "room_type"
+    t.integer "accomodate"
+    t.integer "bedroom_count"
+    t.integer "bathroom_count"
+    t.float "price"
+    t.boolean "has_internet"
+    t.boolean "has_tv"
+    t.boolean "has_kitchen"
+    t.boolean "has_heating"
+    t.boolean "has_air_conditioner"
+    t.string "address"
+    t.boolean "is_active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
