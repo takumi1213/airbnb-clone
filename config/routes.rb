@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :listings
+  
   get 'users/show'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
