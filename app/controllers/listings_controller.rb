@@ -67,7 +67,8 @@ class ListingsController < ApplicationController
       :has_kitchen,
       :has_heating,
       :has_air_conditioner,
-      :address
+      :address,
+      :is_active
     )
   end
 
