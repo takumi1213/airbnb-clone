@@ -1,0 +1,31 @@
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+        <td><%= link_to "Listing", listing_listing_path, class: "mr-auto" %></td><td class="text-center"><%= is_filled?(@listing) %></td>
+        </tr>
+        <tr>
+        <td><%= link_to "Price", price_listing_path, class: "mr-auto" %></td><td class="text-center"><%= is_filled?(@listing.price) %></td>
+        </tr>
+        <tr>
+        <td><%= link_to "Description", description_listing_path, class: "mr-auto" %></td><td class="text-center"><%= is_filled?(@listing.listing_description) %></td>
+        </tr>
+        <tr>
+        <td><%= link_to "Photo", photo_listing_path, class: "mr-auto" %></td><td class="text-center"></td>
+        </tr>
+        <tr>
+        <td><%= link_to "Amenity", amenity_listing_path, class: "mr-auto" %></td><td class="text-center"><i class="fa fa-check text-success"></i></td>
+        </tr>
+        <tr>
+        <td><%= link_to "Location", location_listing_path, class: "mr-auto" %></td><td class="text-center"><%= is_filled?(@listing.address) %></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<%= form_for(@listing) do |f| %>
+    <%= f.hidden_field :is_active ,value: true %>
+    <%= f.submit "Publish", disabled: !is_ready_to_publish(@listing), class: "btn btn-success w-100 mb-3" %>
+<% end %>
+
+<%= link_to "View Listing", "", class: "btn btn-primary w-100" %>

@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-3">
+        <%= render 'sidebar' %>
+    </div>
+
+    <div class="col-9">
+        <div class="card">
+            <div class="card-header">
+                Location
+            </div>
+            <div class="card-body">
+                <%= form_for(@listing) do |f| %>
+                        <%= f.label :address, "Address" %>
+                        <%= f.text_field :address, class: "form-control", placeholder: "What's the address" %>
+                        
+                        <%= f.submit "Save", class: "btn btn-block btn-success mt-3"%>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+</div>

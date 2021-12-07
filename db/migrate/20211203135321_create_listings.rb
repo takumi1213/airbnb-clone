@@ -1,6 +1,7 @@
 class CreateListings < ActiveRecord::Migration[6.1]
   def change
     create_table :listings do |t|
+      t.references :users
       t.string :listing_name
       t.text :listing_description
       t.string :home_type

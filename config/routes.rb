@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
 
-  resources :listings
+  resources :listings do
+    member do
+      get 'listing'
+      get 'price'
+      get 'description'
+      get 'photo'
+      get 'amenity'
+      get 'location'
+    end
+  end
   
   get 'users/show'
   devise_for :users, controllers: {

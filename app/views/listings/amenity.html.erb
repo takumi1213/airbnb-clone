@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-3">
+        <%= render 'sidebar' %>
+    </div>
+
+    <div class="col-9">
+        <div class="card">
+            <div class="card-header">
+                Amenities
+            </div>
+            <div class="card-body">
+                <%= form_for(@listing) do |f| %>
+                    <div class="row">
+                        <div class="col-4">
+                            <%= f.check_box :has_internet %>
+                            <%= f.label :has_internet, "WiFi & Internet" %>
+                        </div>
+                        <div class="col-4">
+                            <%= f.check_box :has_tv %>
+                            <%= f.label :has_tv, "TV" %>
+                        </div>
+                        <div class="col-4">
+                            <%= f.check_box :has_kitchen %>
+                            <%= f.label :has_kitchen, "Kitchen" %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <%= f.check_box :has_heating %>
+                            <%= f.label :has_heating, "Heating" %>
+                        </div>
+                        <div class="col-4">
+                            <%= f.check_box :has_air_conditioner %>
+                            <%= f.label :has_air_conditioner, "Air Conditioner" %>
+                        </div>
+                        
+                    </div>
+
+                    <%= f.submit "Save", class: "btn btn-block btn-success mt-3"%>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+</div>
