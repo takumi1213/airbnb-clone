@@ -10,7 +10,7 @@
         <td><%= link_to "Description", description_listing_path, class: "mr-auto" %></td><td class="text-center"><%= is_filled?(@listing.listing_description) %></td>
         </tr>
         <tr>
-        <td><%= link_to "Photo", photo_listing_path, class: "mr-auto" %></td><td class="text-center"></td>
+        <td><%= link_to "Photo", photo_listing_path, class: "mr-auto" %></td><td class="text-center"><%= is_filled?(@listing.images) %></td>
         </tr>
         <tr>
         <td><%= link_to "Amenity", amenity_listing_path, class: "mr-auto" %></td><td class="text-center"><i class="fa fa-check text-success"></i></td>
@@ -28,4 +28,4 @@
     <%= f.submit "Publish", disabled: !is_ready_to_publish(@listing), class: "btn btn-success w-100 mb-3" %>
 <% end %>
 
-<%= link_to "View Listing", "", class: "btn btn-primary w-100" %>
+<%= link_to "View Listing", listing_path, class: "btn btn-primary w-100" %>

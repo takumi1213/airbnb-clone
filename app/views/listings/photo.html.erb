@@ -9,7 +9,21 @@
                 Upload Photos
             </div>
             <div class="card-body">
-                <%= form_for(@listing) do |f| %>
+
+                <%= form_for @listing, url: listing_images_path(@listing), method: "post", html: { :multipart => true }, enctype: 'multipart/form-data' do |f| %>
+                        <%= file_field_tag "images[]", type: :file, multiple: true, required: true, accept: "image/jpeg,image/gif,image/png" %>
+                            <% @images.each do |image| %>
+                            <div class="col col-lg-4">
+                                <div class="card mt-4">
+                                    <div class="card-img-top-preview"> 
+                                        <%= image_tag image.image, class: "img mw-100" %>
+                                    </div>
+                                    <div class="card-text">
+                                        <%= link_to raw("<i class=' fa fa-trash text-danger'></i>&nbsp;Delete image"), listing_images_path(@listing, image), method: :delete, class: "float-right mr-3 my-3 text-danger MontserratFont" %>
+                                    </div>
+                                </div>                            
+                            </div>
+                        <% end %>
                         <%= f.submit "Save", class: "btn btn-block btn-success mt-3"%>
                 <% end %>
             </div>
