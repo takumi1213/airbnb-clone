@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :listings do
+    resources :images, only: [:create, :destroy]
     member do
       get 'listing'
       get 'price'

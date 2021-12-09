@@ -5,6 +5,7 @@ class ListingsController < ApplicationController
   end
 
   def show
+    @listing = Listing.find(params[:id])
   end
 
   def new
@@ -32,10 +33,16 @@ class ListingsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def destroy
+    Listing.find(params[:id]).destroy
+    redirect_to user_path(current_user)
+  end
+
   def listing
   end
 
   def photo
+    @images = @listing.images
   end
 
   def description

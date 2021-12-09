@@ -9,7 +9,7 @@ module ListingsHelper
   end
 
   def is_ready_to_publish(listing)
-    listing.address.present? && listing.listing_description.present? && listing.price.present? && listing.listing_name.present? #&& listing.images.present?
+    listing.address.present? && listing.listing_description.present? && listing.price.present? && listing.listing_name.present? && listing.images.present?
   end
 
 end
