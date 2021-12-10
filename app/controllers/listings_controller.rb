@@ -37,7 +37,7 @@ class ListingsController < ApplicationController
 
   def destroy
     Listing.find(params[:id]).destroy
-    redirect_to user_path(current_user)
+    redirect_to listings_path
   end
 
   def listing

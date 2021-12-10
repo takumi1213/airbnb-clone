@@ -30,7 +30,11 @@
                 <tbody class="text-center">
                     <% @listings.each do |listing| %>
                         <tr>
-                            <td><%= image_tag listing.images.first.image, style: "width: 100px; height: 100px;" %></td>
+                            <% if listing.images.present? %>
+                                <td><%= image_tag listing.images.first.image, style: "width: 100px; height: 100px;" %></td>
+                            <% else %> 
+                                <td>No images</td>
+                            <% end %>
                             <td><%= listing.listing_name %></td>
                             <td><%= listing.price %></td>
                             <td></td>
