@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_111638) do
   end
 
   create_table "listings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "users_id"
     t.string "listing_name"
     t.text "listing_description"
     t.string "home_type"
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_111638) do
     t.boolean "is_active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["users_id"], name: "index_listings_on_users_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

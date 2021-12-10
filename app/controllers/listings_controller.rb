@@ -2,6 +2,8 @@ class ListingsController < ApplicationController
   before_action :fetch_listing, except: [:new, :create, :index]
 
   def index
+    @listings = Listing.where(users_id: current_user).paginate(page: params[:page], per_page: 10)
+    
   end
 
   def show
@@ -35,7 +37,7 @@ class ListingsController < ApplicationController
 
   def destroy
     Listing.find(params[:id]).destroy
-    redirect_to user_path(current_user)
+    redirect_to listings_path
   end
 
   def listing
@@ -60,7 +62,7 @@ class ListingsController < ApplicationController
   private
   def listing_params
     params.require(:listing).permit(
-      :user_id,
+      :users_id,
       :listing_name,
       :home_type,
       :room_type,
