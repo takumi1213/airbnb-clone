@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :listings do
     resources :images, only: [:create, :destroy]
+    resources :bookings
     member do
       get 'listing'
       get 'price'
@@ -9,8 +10,11 @@ Rails.application.routes.draw do
       get 'photo'
       get 'amenity'
       get 'location'
+      get 'check_current_bookings'
+      get 'review_booking'
     end
   end
+
   
   get 'users/show'
   devise_for :users, controllers: {

@@ -12,7 +12,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-8">
+    <div class="col-7">
         <div class="jumbotron">
             
                 <div class="row">
@@ -72,7 +72,7 @@
                         <div class="carousel-inner" role="listbox">
                             <% @listing.images.each do |images| %>
                                 <div class="carousel-item <%= images.id == @listing.images.first.id ? 'active' : '' %>">
-                                    <%= image_tag images.image, class: "mw-100 d-block gallery" ,style: "width: 700px; height: 500px" %>
+                                    <%= image_tag images.image, class: "mw-100 d-block gallery" ,style: "width: 700px; height: 400px" %>
                                 </div>
                             <% end %>
                         </div>
@@ -113,22 +113,142 @@
     </div>
 
 
-
-    <div class="col-4">
-        <div class="jumbotron">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title"><p>$ <%= @listing.price %> Per Night</p></h5>
-                        
+    
+<% if @listing.users_id != current_user.id %>
+  <div class="col-5">
+        <%= form_for [@listing, @listing.bookings.new] do |f| %>
+            <div class="jumbotron">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><p>$ <%= @listing.price %> Per Night</p></h5>
+                            
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-6">Check In<br><input type="text" class="form-control"></div>
-                                <div class="col-6">Check Out<br><input type="text" class="form-control"></div>
-                            </div>
-                        </div>
-                    <%= link_to "Book now", "", class: "btn btn-primary w-100 mt-3" %>
+                                <div class="col-6">Check In<br>
+                                    <%= f.hidden_field :listing_id, value: @listing.id %>
+                                    <%= f.text_field :check_in_date, id: "check_in_date", class: "form-control", readonly: true, placeholder: "Check In Date" %>
+                                </div>
+                                <div class="col-6">Check Out<br>
+                                    <%= f.text_field :check_out_date, id: "check_out_date", class: "form-control", readonly: true, placeholder: "Check Out Date"%>
+                                </div>
+                                <div class="col-12">
+                                    <div id="preview" style="display: none;" >
+                                        <div class="row">
+                                            <p class="text-center" id="message"></p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="text-center">PRICE</p>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-center">$<%= @listing.price %></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="text-center">Night(s)</p>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-center">x <span id="nights"></span> </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h4 class="text-center">TOTAL</h4>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-center">$ <span id="total_price"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <%= f.submit "RESERVE", id: 'reserve', class: "btn btn-success " %>
+                                </div>
+                            </div>   
+                        </div>           
+                    </div>
                 </div>
             </div>
-        </div>
+        <% end %>
     </div>
+    <% end %>
 </div>
+
+
+  <script>
+    $(function(){
+        $("#check_in_date").datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            toggleActive: true,
+            format: 'dd/mm/yyyy',
+            startDate: '0',
+            endDate: '+3m',
+        }).on('changeDate', function(selected){
+        updateDate($(this).find('check_out_date'), selected);
+        });
+
+        $("#check_out_date").datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            toggleActive: true,
+            format: 'dd/mm/yyyy',
+            endDate: '+3m',
+        }).on('changeDate', function(selected){
+        updateDate($(this).find('check_in_date'), selected);
+        });
+
+        function updateDate(inputs, selected){
+            var minDate = new Date(selected.date.valueOf());
+            $('#check_out_date').datepicker('setStartDate', minDate);
+            $('#check_in_date').datepicker('setEndDate', minDate);
+            unavailableDates = [];
+
+            $.ajax({
+                url: '<%= check_current_bookings_listing_path(@listing) %>',
+                dataType: 'json',
+                success: function(data){
+                    console.log("Success");
+                    $.each(data, function(arrayID, arrayValue) {
+                    for(var i = new Date(arrayValue.check_in_date); i <= new Date(arrayValue.check_out_date); i.setDate(i.getDate()+1)){
+                        unavailableDates.push($.datepicker.formatDate('d-m-yy', i));
+                        }
+                    })
+                    console.log(unavailableDates)
+                }
+            })
+            console.log($('#check_in_date').datepicker("getDate"));
+            console.log($('#check_out_date').datepicker("getDate"));
+            var check_in = $('#check_in_date').datepicker("getDate");
+            var check_out = $('#check_out_date').datepicker("getDate");
+            var nights = (check_out - check_in)/1000/3600/24;
+            var input = {
+                'check_in_date': check_in,
+                'check_out_date': check_out
+            }
+            $.ajax({
+                url: '<%= review_booking_listing_path(@listing) %>',
+                data: input,
+                success: function(data){
+                    if(data.conflict){
+                        $('#message').text('Selected Dates are Unavailable');
+                        $('#preview').hide();
+                        $('#reserve').attr('disabled', true)
+                    } else {
+                        $('#message').text('Selected Dates are Available');
+                        $('#preview').show();
+                        $('#reserve').attr('disabled', false)
+                        if(check_in.getTime() == check_out.getTime()){
+                            nights = 1;
+                        }
+                    }
+                    var total_price = nights * <%= @listing.price %>
+                    $('#nights').text(nights);
+                    $('#total_price').text(total_price);
+                }
+            })
+        }
+    });
+  </script>
