@@ -7,6 +7,9 @@ import "@fortawesome/fontawesome-free/js/all";
 import './src/application.scss'
 import toastr from 'toastr'
 window.toastr = toastr
+import "bootstrap-datepicker"
+import jquery from 'jquery'
+window.$ = window.jquery = jquery
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
