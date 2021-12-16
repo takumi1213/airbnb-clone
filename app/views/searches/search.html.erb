@@ -1,0 +1,22 @@
+<h1>Find your stay today ! </h1>
+
+<div class="row">
+    <div class="col-7">
+        <% @result_list.each do |item|%>
+        <div class="card mt-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4"><%= image_tag item.images.first.image, style: "width: 200px; height: 200px;" %></div>
+                <div class="col-8">
+                    <h3 class="card-title"><%= link_to item.listing_name, listing_path(item) %></h3><hr>
+                    <p class="card-text">Address: <%= item.address %></p>
+                    <p class="card-text">Price: <%= item.price %></p>
+                    <p class="card-text"><p>Coordinates: <%= item.latitude %> <%= item.longitude %></p>
+                </div>
+            </div>    
+        </div>
+        </div>
+        <% end %>
+    </div>
+    <div class="col-5"></div>
+</div>

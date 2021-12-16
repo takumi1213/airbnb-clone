@@ -59,6 +59,10 @@ class ListingsController < ApplicationController
   def location
   end
 
+  def address
+    [street, city, state, country].compact.join(', ')
+  end
+
   def check_current_bookings
     today = Date.today
     booking = @listing.bookings.where("check_in_date >= ? OR check_out_date >= ?", today, today)

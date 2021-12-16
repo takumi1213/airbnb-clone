@@ -6,22 +6,10 @@
     <hr class="my-4">
     <div class="container">
         <div class="col-12">
-            <div class="row mb-3">
-                <div class="col d-flex justify-content-center">
-                    <input type="text" placeholder="Where are you going ? " class="form-control w-50">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-4 offset-md-4 d-flex justify-content-center ">
-                    <input type="date" class="form-control">
-                    <input type="date" class="form-control">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col d-flex justify-content-center">
-                    <input type="button" value="Submit" class="btn btn-success w-50">
-                </div>
-            </div>
+            <%= form_tag search_path, method: :get do %>
+            <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Location Address" %>
+            <%= submit_tag "Submit", class:"btn btn-success" %>
+            <% end %>
         </div>
     </div>
     
